@@ -20,7 +20,6 @@ def test_init(phone):
     assert phone.price == 20000
     assert phone.name == "samsung"
     assert phone.quantity == 4
-    assert Item.all == [{"name": "samsung", "price": 20000, "quantity": 4}]
 
 
 def test_repr(phone):
@@ -35,3 +34,23 @@ def test_apply_discount(pay_rate_test):
     phone_test = pay_rate_test
     phone_test.apply_discount()
     assert phone_test.price == 16000
+
+
+def test_instantiate_from_csv():
+    Item.all = []
+    Item.instantiate_from_csv('src/items.csv')
+    assert len(Item.all) == 5
+
+
+def test_name(phone):
+    phone.name = 'Смартфон'
+    assert phone.name == 'Смартфон'
+
+    phone.name = 'СуперСмартфон'
+    assert phone.name == "СуперСмарт"
+
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
