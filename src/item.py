@@ -23,7 +23,10 @@ class Item:
         Item.all.append(self)
 
     def __repr__(self):
-        return f"name: {self.name}, price: {self.price}, quantity: {self.quantity}"
+        return f"Item('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f"{self.name}"
 
     def calculate_total_price(self) -> float:
         """
@@ -65,7 +68,3 @@ class Item:
     @staticmethod
     def string_to_number(string):
         return int(float(string))
-
-
-samsung = Item("samsung", 20000, 4)
-print(Item.all)
