@@ -23,7 +23,11 @@ def test_init(phone):
 
 
 def test_repr(phone):
-    assert phone.__repr__() == "name: samsung, price: 20000, quantity: 4"
+    assert phone.__repr__() == "Item('samsung', 20000, 4)"
+
+
+def test_str(phone):
+    assert phone.__str__() == "samsung"
 
 
 def test_calculate_total_price(phone):
