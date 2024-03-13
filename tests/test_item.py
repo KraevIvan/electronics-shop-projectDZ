@@ -58,3 +58,9 @@ def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
+
+
+def test_add(phone):
+    phone2 = Item("iphone", 25000, 3)
+    assert phone + phone2 == 7
+    assert phone + 5 == ValueError("Складывать можно только объекты класса Item и дочерние от него")
