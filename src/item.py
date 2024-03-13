@@ -23,10 +23,15 @@ class Item:
         Item.all.append(self)
 
     def __repr__(self):
-        return f"Item('{self.name}', {self.price}, {self.quantity})"
+        return f"{type(self).__name__}('{self.name}', {self.price}, {self.quantity})"
 
     def __str__(self):
         return f"{self.name}"
+
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError("Складывать можно только объекты класса Item и дочерние от него")
+        return self.quantity + other.quantity
 
     def calculate_total_price(self) -> float:
         """
