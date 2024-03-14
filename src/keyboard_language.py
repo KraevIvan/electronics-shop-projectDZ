@@ -12,4 +12,3 @@ class KeyboardLanguage:
             self.__language = "EN"
         else:
             self.__language = "RU"
-
