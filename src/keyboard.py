@@ -10,6 +10,3 @@ class Keyboard(Item, KeyboardLanguage):
 
     def __repr__(self):
         return f"{Item.__repr__(self)[:-1]}, {self.language})"
-
-kb = Keyboard('Dark Project KD87A', 9600, 5)
-print(str(kb))
