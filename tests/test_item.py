@@ -63,5 +63,5 @@ def test_string_to_number():
 def test_add(phone):
     phone2 = Item("iphone", 25000, 3)
     assert phone + phone2 == 7
-    with pytest.raises(ValueError):
-        assert phone + 5 == ValueError("Складывать можно только объекты класса Item и дочерние от него")
+    with pytest.raises(ValueError, match="Складывать можно только объекты класса Item и дочерние от него"):
+        phone + 5

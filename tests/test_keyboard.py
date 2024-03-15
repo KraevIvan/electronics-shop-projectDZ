@@ -15,6 +15,5 @@ def test_keyboard(kb):
     assert str(kb.language) == "RU"
     kb.change_lang()
     assert str(kb.language) == "EN"
-    with pytest.raises(AttributeError):
+    with pytest.raises(AttributeError, match="property 'language' of 'Keyboard' object has no setter"):
         kb.language = 'CH'
-    # # AttributeError: property 'language' of 'Keyboard' object has no setter
