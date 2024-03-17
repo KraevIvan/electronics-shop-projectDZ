@@ -62,9 +62,7 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls, path):
 
-        if not os.path.exists(path):
-            raise FileNotFoundError("По данному пути файл item.csv Отсутствует")
-        else:
+        if os.path.exists(path):
             with open(path, newline='\n') as csvfile:
                 items = csv.reader(csvfile, delimiter=' ')
                 first_str = 0
@@ -72,11 +70,13 @@ class Item:
                     if first_str == 0:
                         first_str = 1
                     else:
-                            item = item[0].split(",")
-                            if len(item) < 3:
-                                raise InstantiateCSVError('Файл item.csv поврежден')
-                            else:
-                                Item(item[0], float(item[1]), int(item[2]))
+                        item = item[0].split(",")
+                        if len(item) < 3:
+                            raise InstantiateCSVError('Файл item\\.csv поврежден')
+                        else:
+                            Item(item[0], float(item[1]), int(item[2]))
+        else:
+            raise FileNotFoundError("По данному пути файл item.csv отсутствует")
 
     @staticmethod
     def string_to_number(string):
@@ -84,15 +84,12 @@ class Item:
 
 
 class InstantiateCSVError(Exception):
-    def __init__(self, *args):
-        if args:
-            self.message = args[0]
-        else:
-            self.message = None
+    def __init__(self, message=None):
+        self.message = message
 
     def __str__(self):
-        if self.message:
-            return 'InstantiateCSVError, {0} '.format(self.message)
+        if self.message is None:
+            return f'InstantiateCSVError'
         else:
-            return 'InstantiateCSVError'
+            return f"InstantiateCSVError, {self.message}"
 
