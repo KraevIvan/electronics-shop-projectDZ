@@ -1,4 +1,5 @@
 import csv
+import os
 
 
 class Item:
@@ -60,16 +61,38 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, path):
-        with open(path, newline='\n') as csvfile:
-            items = csv.reader(csvfile, delimiter=' ')
-            first_str = 0
-            for item in items:
-                if first_str == 0:
-                    first_str = 1
-                else:
-                    item = str(item[0]).split(",")
-                    Item(item[0], float(item[1]), int(item[2]))
+
+        if not os.path.exists(path):
+            raise FileNotFoundError("По данному пути файл item.csv Отсутствует")
+        else:
+            with open(path, newline='\n') as csvfile:
+                items = csv.reader(csvfile, delimiter=' ')
+                first_str = 0
+                for item in items:
+                    if first_str == 0:
+                        first_str = 1
+                    else:
+                            item = item[0].split(",")
+                            if len(item) < 3:
+                                raise InstantiateCSVError('Файл item.csv поврежден')
+                            else:
+                                Item(item[0], float(item[1]), int(item[2]))
 
     @staticmethod
     def string_to_number(string):
         return int(float(string))
+
+
+class InstantiateCSVError(Exception):
+    def __init__(self, *args):
+        if args:
+            self.message = args[0]
+        else:
+            self.message = None
+
+    def __str__(self):
+        if self.message:
+            return 'InstantiateCSVError, {0} '.format(self.message)
+        else:
+            return 'InstantiateCSVError'
+
