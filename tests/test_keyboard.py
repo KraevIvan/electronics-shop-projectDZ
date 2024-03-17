@@ -15,5 +15,6 @@ def test_keyboard(kb):
     assert str(kb.language) == "RU"
     kb.change_lang()
     assert str(kb.language) == "EN"
+    assert kb.__repr__() == "Keyboard('Dark Project KD87A', 9600, 5, EN)"
     with pytest.raises(AttributeError, match="property 'language' of 'Keyboard' object has no setter"):
         kb.language = 'CH'

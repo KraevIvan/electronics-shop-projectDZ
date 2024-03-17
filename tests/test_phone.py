@@ -15,5 +15,8 @@ def test_init(phone1):
     assert phone1.number_of_sim == 2
     with pytest.raises(ValueError, match="Количество физических SIM-карт должно быть целым числом больше нуля."):
         Phone("Meizu", 25000, 3, -1)
+    with pytest.raises(ValueError, match="Количество физических SIM-карт должно быть целым числом больше нуля."):
+        phone1.number_of_sim = -2
     phone1.number_of_sim = 1
     assert phone1.number_of_sim == 1
+    assert phone1.__repr__() == "Phone('samsung', 20000, 4, 1)"
